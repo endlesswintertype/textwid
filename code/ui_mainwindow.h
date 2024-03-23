@@ -53,7 +53,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 400, 23));
+        menuBar->setGeometry(QRect(0, 0, 400, 26));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -72,7 +72,7 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
         startBtn->setText(QApplication::translate("MainWindow", "start", 0));
         newBtn->setText(QApplication::translate("MainWindow", "restart", 0));
-        closeBtn->setText(QApplication::translate("MainWindow", "close", 0));
+        closeBtn->setText(QApplication::translate("MainWindow", "\345\205\263\351\227\255", 0));
     } // retranslateUi
 
 };

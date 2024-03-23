@@ -9,6 +9,12 @@ DialogChooseNew::DialogChooseNew(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // 隐藏标题栏和边框
+    setWindowFlags(Qt::FramelessWindowHint);
+
+    // 设置对话框为模态方式显示
+    setModal(true);
+
 
     // 创建按钮组
     QButtonGroup* group = new QButtonGroup(parent);
@@ -30,7 +36,7 @@ DialogChooseNew::~DialogChooseNew()
 
 void DialogChooseNew::on_buttonBox_accepted()
 {
-    qDebug()<<"accept";
+    //qDebug()<<"accept";
     if(ui->radioButton->isChecked())
     {
         emit sigChosen("yt");

@@ -19,6 +19,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -30,22 +31,28 @@ class Ui_talkDialog
 public:
     QHBoxLayout *horizontalLayout;
     QWidget *widget;
-    QPushButton *hestoryBtn;
+    QVBoxLayout *verticalLayout_3;
+    QVBoxLayout *verticalLayout_2;
+    QHBoxLayout *horizontalLayout_5;
+    QPushButton *historyBtn;
+    QPushButton *closeHistory;
+    QSpacerItem *horizontalSpacer;
     QPushButton *closeBtn;
     QTextEdit *textContent;
+    QHBoxLayout *horizontalLayout_6;
+    QSpacerItem *horizontalSpacer_2;
     QPushButton *nextBtn;
-    QTextEdit *textName;
     QListWidget *listWidget;
     QWidget *widgetChoose;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_2;
-    QLabel *textLabel1;
+    QLabel *eventName1;
     QPushButton *optionBtn;
     QHBoxLayout *horizontalLayout_3;
-    QLabel *textLabel2;
+    QLabel *eventName2;
     QPushButton *optionBtn2;
     QHBoxLayout *horizontalLayout_4;
-    QLabel *textLabel3;
+    QLabel *eventName3;
     QPushButton *optionBtn3;
 
     void setupUi(QDialog *talkDialog)
@@ -59,24 +66,61 @@ public:
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
         widget = new QWidget(talkDialog);
         widget->setObjectName(QStringLiteral("widget"));
-        hestoryBtn = new QPushButton(widget);
-        hestoryBtn->setObjectName(QStringLiteral("hestoryBtn"));
-        hestoryBtn->setGeometry(QRect(10, 10, 75, 23));
+        verticalLayout_3 = new QVBoxLayout(widget);
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
+        historyBtn = new QPushButton(widget);
+        historyBtn->setObjectName(QStringLiteral("historyBtn"));
+
+        horizontalLayout_5->addWidget(historyBtn);
+
+        closeHistory = new QPushButton(widget);
+        closeHistory->setObjectName(QStringLiteral("closeHistory"));
+
+        horizontalLayout_5->addWidget(closeHistory);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_5->addItem(horizontalSpacer);
+
         closeBtn = new QPushButton(widget);
         closeBtn->setObjectName(QStringLiteral("closeBtn"));
-        closeBtn->setGeometry(QRect(280, 10, 75, 23));
+
+        horizontalLayout_5->addWidget(closeBtn);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_5);
+
         textContent = new QTextEdit(widget);
         textContent->setObjectName(QStringLiteral("textContent"));
-        textContent->setGeometry(QRect(10, 90, 351, 121));
+
+        verticalLayout_2->addWidget(textContent);
+
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_6->addItem(horizontalSpacer_2);
+
         nextBtn = new QPushButton(widget);
         nextBtn->setObjectName(QStringLiteral("nextBtn"));
-        nextBtn->setGeometry(QRect(280, 250, 75, 23));
-        textName = new QTextEdit(widget);
-        textName->setObjectName(QStringLiteral("textName"));
-        textName->setGeometry(QRect(10, 50, 71, 31));
+
+        horizontalLayout_6->addWidget(nextBtn);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_6);
+
+
+        verticalLayout_3->addLayout(verticalLayout_2);
+
         listWidget = new QListWidget(widget);
         listWidget->setObjectName(QStringLiteral("listWidget"));
-        listWidget->setGeometry(QRect(10, 40, 341, 141));
+
+        verticalLayout_3->addWidget(listWidget);
+
 
         horizontalLayout->addWidget(widget);
 
@@ -86,10 +130,10 @@ public:
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        textLabel1 = new QLabel(widgetChoose);
-        textLabel1->setObjectName(QStringLiteral("textLabel1"));
+        eventName1 = new QLabel(widgetChoose);
+        eventName1->setObjectName(QStringLiteral("eventName1"));
 
-        horizontalLayout_2->addWidget(textLabel1);
+        horizontalLayout_2->addWidget(eventName1);
 
         optionBtn = new QPushButton(widgetChoose);
         optionBtn->setObjectName(QStringLiteral("optionBtn"));
@@ -102,10 +146,10 @@ public:
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        textLabel2 = new QLabel(widgetChoose);
-        textLabel2->setObjectName(QStringLiteral("textLabel2"));
+        eventName2 = new QLabel(widgetChoose);
+        eventName2->setObjectName(QStringLiteral("eventName2"));
 
-        horizontalLayout_3->addWidget(textLabel2);
+        horizontalLayout_3->addWidget(eventName2);
 
         optionBtn2 = new QPushButton(widgetChoose);
         optionBtn2->setObjectName(QStringLiteral("optionBtn2"));
@@ -118,10 +162,10 @@ public:
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
-        textLabel3 = new QLabel(widgetChoose);
-        textLabel3->setObjectName(QStringLiteral("textLabel3"));
+        eventName3 = new QLabel(widgetChoose);
+        eventName3->setObjectName(QStringLiteral("eventName3"));
 
-        horizontalLayout_4->addWidget(textLabel3);
+        horizontalLayout_4->addWidget(eventName3);
 
         optionBtn3 = new QPushButton(widgetChoose);
         optionBtn3->setObjectName(QStringLiteral("optionBtn3"));
@@ -146,15 +190,16 @@ public:
     void retranslateUi(QDialog *talkDialog)
     {
         talkDialog->setWindowTitle(QApplication::translate("talkDialog", "Dialog", 0));
-        hestoryBtn->setText(QApplication::translate("talkDialog", "PushButton", 0));
-        closeBtn->setText(QApplication::translate("talkDialog", "return", 0));
-        nextBtn->setText(QApplication::translate("talkDialog", "PushButton", 0));
-        textLabel1->setText(QApplication::translate("talkDialog", "TextLabel", 0));
-        optionBtn->setText(QApplication::translate("talkDialog", "PushButton", 0));
-        textLabel2->setText(QApplication::translate("talkDialog", "TextLabel", 0));
-        optionBtn2->setText(QApplication::translate("talkDialog", "PushButton", 0));
-        textLabel3->setText(QApplication::translate("talkDialog", "TextLabel", 0));
-        optionBtn3->setText(QApplication::translate("talkDialog", "PushButton", 0));
+        historyBtn->setText(QApplication::translate("talkDialog", "\345\233\236\351\241\276", 0));
+        closeHistory->setText(QApplication::translate("talkDialog", "\345\205\263\351\227\255\345\233\236\351\241\276", 0));
+        closeBtn->setText(QApplication::translate("talkDialog", "\350\277\224\345\233\236", 0));
+        nextBtn->setText(QApplication::translate("talkDialog", "\347\273\247\347\273\255", 0));
+        eventName1->setText(QApplication::translate("talkDialog", "TextLabel", 0));
+        optionBtn->setText(QApplication::translate("talkDialog", "\351\200\211\346\213\251", 0));
+        eventName2->setText(QApplication::translate("talkDialog", "eventName1", 0));
+        optionBtn2->setText(QApplication::translate("talkDialog", "\351\200\211\346\213\251", 0));
+        eventName3->setText(QApplication::translate("talkDialog", "eventName3", 0));
+        optionBtn3->setText(QApplication::translate("talkDialog", "\351\200\211\346\213\251", 0));
     } // retranslateUi
 
 };

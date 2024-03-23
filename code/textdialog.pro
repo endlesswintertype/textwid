@@ -21,8 +21,10 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h \
     recordselection.h \
     talkDialog.h \
-    DialogChooseNew.h
+    DialogChooseNew.h \
+    eventinfo.h
 
 FORMS    += mainwindow.ui \
     talkDialog.ui \
     DialogChooseNew.ui
+

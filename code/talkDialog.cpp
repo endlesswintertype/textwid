@@ -15,9 +15,7 @@ talkDialog::talkDialog(QWidget *parent) :
     //setWindowFlags(Qt::FramelessWindowHint);
     ui->listWidget->hide();
     ui->widgetChoose->hide();
-
-
-
+    ui->closeHistory->hide();
 
     //    connect(ui->optionBtn,&QPushButton::clicked,this,&talkDialog::rightBtnClicked);
     //  	connect(ui->optionBtn2,&QPushButton::clicked,this,&talkDialog::rightBtnClicked);
@@ -47,7 +45,7 @@ QJsonArray talkDialog::readDialogueFromFile( QString name, QString filePath)
     {
         qDebug() << parseJsonErr.errorString();
     }
-    qDebug()<<document;
+    //qDebug()<<document;
     nTextListSize = document.array().size();
 
     return document.array();
@@ -57,7 +55,7 @@ Dialogue talkDialog::getDialogueFromJson(const QJsonObject& jsonObj)
 {
     Dialogue dialogue;
     foreach (const QString& key, jsonObj.keys()) {
-        if (key == "speaker1" || key == "speaker2") {
+        if (key == "speaker") {
             dialogue.speaker = jsonObj.value(key).toString();
         } else if (key == "content") {
             dialogue.content = jsonObj.value(key).toString();
@@ -69,7 +67,7 @@ Dialogue talkDialog::getDialogueFromJson(const QJsonObject& jsonObj)
 Dialogue talkDialog::getNthDialogueFromFile(int n)
 {
     QJsonObject nthDialogueJson = mText.at(n).toObject();
-    qDebug()<<nthDialogueJson<<n;
+    //qDebug()<<"getNthDialogueFromFile"<<nthDialogueJson<<n;
     return getDialogueFromJson(nthDialogueJson);
 }
 
@@ -79,16 +77,40 @@ void talkDialog::on_nextBtn_clicked()
     {
     mUe =  getNthDialogueFromFile(nTextListNum);
     nTextListNum++;
-    ui->textContent->setText(mUe.content);
-    ui->textName->setText(mUe.speaker);
-    mTextHistory.append(mUe);
-    qDebug()<<mUe.content<<mUe.content<<nTextListNum;
+    QString speaker;//姓名替换
+    if(mUe.speaker == "player")
+        speaker = mPlayerName;
+    else
+        speaker = mUe.speaker;
+    QString str = speaker + "\n" + mUe.content;
+    ui->textContent->setText(str);
+    mTextHistory.append(str);
+    qDebug()<<"nextBtn"<<str<<nTextListNum;
+    }
+    else
+    {
+        //对话完成，进行记录，重新查询当前状态
+        nTextListNum = 0;
+        ui->textContent->clear();
+        mTextHistory.clear();
+        if(nEventId!=0){//事件
+            emit sigEventLog(nEventId);
+            nEventId = 0;
+        }else//非事件
+        {
+            emit sigEventLog(0);
+            emit sigCheckCurrentStatus();
+        }
     }
 
 }
 
 void talkDialog::on_closeBtn_clicked()
 {
+    if(b_ShowState == true)//已选择事件
+    {//保存当前进度
+
+    }
     emit SigCloseDialog();
 }
 
@@ -123,19 +145,35 @@ void talkDialog::generateButtonsFromMap(const QMap<int, QString>& data, QWidget*
 }
 
 
-void talkDialog::on_hestoryBtn_clicked()
+void talkDialog::on_historyBtn_clicked()
 {
-    if(ui->listWidget->isHidden())
+//    if(ui->listWidget->isHidden())
+//    {
         ui->listWidget->show();
-    else
-        ui->listWidget->hide();
+        ui->historyBtn->hide();
+        ui->closeHistory->show();
+        ui->closeBtn->hide();
+        ui->textContent->hide();
+        ui->nextBtn->hide();
+        ui->listWidget->clear(); // 清空列表控件
+
+        for (const QString &text : mTextHistory) {
+            QListWidgetItem *item = new QListWidgetItem(text);
+            ui->listWidget->addItem(item);
+        }
+//    }
+//    else{
+//        ui->listWidget->hide();
+//        ui->historyBtn->show();
+//    }
 }
 
 void talkDialog::rightBtnClicked(int n)
 {
-    int eventId = nIdChoose.at(n-1);
-    sltShowEvent(QString::number(eventId));
+    nEventId = nIdChoose.at(n-1);
+    sltShowEvent(QString::number(nEventId));
     qDebug()<<n;
+    if(b_ShowState == false)
     widgetChange();
 }
 
@@ -156,15 +194,18 @@ void talkDialog::on_optionBtn3_clicked()
 
 void talkDialog::widgetChange()
 {
-    if(ui->widget->isHidden())
+    qDebug()<<"widgetChange"<<b_ShowState;
+    if(b_ShowState == false)
     {
         ui->widget->show();
         ui->widgetChoose->hide();
+        b_ShowState = true;
     }
     else
     {
         ui->widget->hide();
         ui->widgetChoose->show();
+        b_ShowState = false;
     }
 }
 
@@ -197,27 +238,43 @@ QList<int> talkDialog::getThreeRandomNumbers( QList<int> nums)
     return res; // 返回包含三个随机数的向量
 }
 
-void talkDialog::sltGetEventId(QList<int> idList)
+void talkDialog::setPlayerName(QString name)
 {
-    nIdChoose = getThreeRandomNumbers(idList);
+    mPlayerName = name;
+}
+
+void talkDialog::sltGetEventId(QList<EventInfo> idList)
+{
+    QList<int> eventIdList;
+    for (const EventInfo &eventInfo : idList) {
+        eventIdList.append(eventInfo.eventNum);
+    }
+    nIdChoose = getThreeRandomNumbers(eventIdList);
     for (int i = 0; i < nIdChoose.size(); ++i) {
         int eventNum = nIdChoose.at(i);
-        QString eventName  = "event" + QString::number(eventNum);
-        qDebug()<<i<<eventNum<<nIdChoose;
+        QString eventInfoStr;
+
+        for (const EventInfo &eventInfo : idList) {
+            if (eventInfo.eventNum == eventNum) {
+                eventInfoStr = eventInfo.description;
+            }
+        }
+        //qDebug()<<nIdChoose.size();
         switch (i) {
         case 0:
         {
-            ui->textLabel1->setText(eventName);
+
+            ui->eventName1->setText(eventInfoStr);
             break;
         }
         case 1:
         {
-            ui->textLabel2->setText(eventName);
+            ui->eventName2->setText(eventInfoStr);
             break;
         }
         case 2:
         {
-            ui->textLabel3->setText(eventName);
+            ui->eventName3->setText(eventInfoStr);
             break;
         }
         default:
@@ -227,12 +284,39 @@ void talkDialog::sltGetEventId(QList<int> idList)
         }
         }
     }
-    widgetChange();
+    if(b_ShowState == true)//切换到选择窗口
+        widgetChange();
 
 }
 
 void talkDialog::sltShowEvent(QString eventName)
 {
-    mText = readDialogueFromFile(eventName,"/JsonData/event/");
+    if(b_ShowState == false)
+        widgetChange();
+    ui->historyBtn->show();
+    ui->closeBtn->show();
+    mText = readDialogueFromFile(eventName,"/../../text/");
     on_nextBtn_clicked();
+}
+
+void talkDialog::sltShowCut(QString cutName)
+{//切换到文本窗口
+    if(b_ShowState == false)
+        widgetChange();
+    ui->historyBtn->hide();
+    ui->closeBtn->hide();
+    mText = readDialogueFromFile(cutName,"/../../text/");
+    on_nextBtn_clicked();
+}
+
+
+
+void talkDialog::on_closeHistory_clicked()
+{
+    ui->listWidget->hide();
+    ui->historyBtn->show();
+    ui->closeHistory->hide();
+    ui->closeBtn->show();
+    ui->textContent->show();
+    ui->nextBtn->show();
 }

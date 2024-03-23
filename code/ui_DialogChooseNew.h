@@ -38,12 +38,15 @@ public:
         DialogChooseNew->resize(174, 188);
         radioButton = new QRadioButton(DialogChooseNew);
         radioButton->setObjectName(QStringLiteral("radioButton"));
-        radioButton->setGeometry(QRect(9, 18, 35, 16));
+        radioButton->setEnabled(false);
+        radioButton->setGeometry(QRect(9, 18, 71, 16));
         radioButton2 = new QRadioButton(DialogChooseNew);
         radioButton2->setObjectName(QStringLiteral("radioButton2"));
+        radioButton2->setEnabled(false);
         radioButton2->setGeometry(QRect(9, 49, 41, 16));
         radioButton3 = new QRadioButton(DialogChooseNew);
         radioButton3->setObjectName(QStringLiteral("radioButton3"));
+        radioButton3->setEnabled(false);
         radioButton3->setGeometry(QRect(9, 80, 35, 16));
         radioButton4 = new QRadioButton(DialogChooseNew);
         radioButton4->setObjectName(QStringLiteral("radioButton4"));
@@ -67,7 +70,7 @@ public:
     void retranslateUi(QDialog *DialogChooseNew)
     {
         DialogChooseNew->setWindowTitle(QApplication::translate("DialogChooseNew", "Dialog", 0));
-        radioButton->setText(QApplication::translate("DialogChooseNew", "yt", 0));
+        radioButton->setText(QApplication::translate("DialogChooseNew", "yuuta", 0));
         radioButton2->setText(QApplication::translate("DialogChooseNew", "fhh", 0));
         radioButton3->setText(QApplication::translate("DialogChooseNew", "yr", 0));
         radioButton4->setText(QApplication::translate("DialogChooseNew", "character", 0));

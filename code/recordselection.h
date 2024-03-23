@@ -20,9 +20,11 @@ class RecordSelection
 {
 public:
     RecordSelection();
+    //取人物数据
     QJsonObject OpenJsonToObj(QString path);
+    //取事件数据
+    QJsonObject OpenEventJsonToObj(QString path);
     QJsonArray OpenJsonToArray(QString path);
-    void setDataTo5();
     void setDataToPlayer();
     void getDataBy5();
     void getDataByPlayer();
@@ -32,6 +34,8 @@ public:
     void UpdateJson5(QString name, int i);
     void UpdateJsonPlayer(QString name, int i);
     void saveDataToJson(QString path, QJsonObject obj);
+    int getRandomNumber(int min, int max);
+
     QJsonObject mJsonObject;
     QJsonObject mJDataPlayer;
     QJsonObject mJData5;

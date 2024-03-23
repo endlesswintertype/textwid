@@ -31,75 +31,80 @@
    </property>
    <item>
     <widget class="QWidget" name="widget" native="true">
-     <widget class="QPushButton" name="hestoryBtn">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>PushButton</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="closeBtn">
-      <property name="geometry">
-       <rect>
-        <x>280</x>
-        <y>10</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>return</string>
-      </property>
-     </widget>
-     <widget class="QTextEdit" name="textContent">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>90</y>
-        <width>351</width>
-        <height>121</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="nextBtn">
-      <property name="geometry">
-       <rect>
-        <x>280</x>
-        <y>250</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>PushButton</string>
-      </property>
-     </widget>
-     <widget class="QTextEdit" name="textName">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>50</y>
-        <width>71</width>
-        <height>31</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QListWidget" name="listWidget">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>40</y>
-        <width>341</width>
-        <height>141</height>
-       </rect>
-      </property>
-     </widget>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QPushButton" name="historyBtn">
+            <property name="text">
+             <string>回顾</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="closeHistory">
+            <property name="text">
+             <string>关闭回顾</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="closeBtn">
+            <property name="text">
+             <string>返回</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QTextEdit" name="textContent"/>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="nextBtn">
+            <property name="text">
+             <string>继续</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QListWidget" name="listWidget"/>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>
@@ -108,7 +113,7 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,0">
         <item>
-         <widget class="QLabel" name="textLabel1">
+         <widget class="QLabel" name="eventName1">
           <property name="text">
            <string>TextLabel</string>
           </property>
@@ -117,7 +122,7 @@
         <item>
          <widget class="QPushButton" name="optionBtn">
           <property name="text">
-           <string>PushButton</string>
+           <string>选择</string>
           </property>
          </widget>
         </item>
@@ -126,16 +131,16 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,0">
         <item>
-         <widget class="QLabel" name="textLabel2">
+         <widget class="QLabel" name="eventName2">
           <property name="text">
-           <string>TextLabel</string>
+           <string>eventName1</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="optionBtn2">
           <property name="text">
-           <string>PushButton</string>
+           <string>选择</string>
           </property>
          </widget>
         </item>
@@ -144,16 +149,16 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="1,0">
         <item>
-         <widget class="QLabel" name="textLabel3">
+         <widget class="QLabel" name="eventName3">
           <property name="text">
-           <string>TextLabel</string>
+           <string>eventName3</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="optionBtn3">
           <property name="text">
-           <string>PushButton</string>
+           <string>选择</string>
           </property>
          </widget>
         </item>

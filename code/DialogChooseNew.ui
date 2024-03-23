@@ -14,19 +14,25 @@
    <string>Dialog</string>
   </property>
   <widget class="QRadioButton" name="radioButton">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>9</x>
      <y>18</y>
-     <width>35</width>
+     <width>71</width>
      <height>16</height>
     </rect>
    </property>
    <property name="text">
-    <string>yt</string>
+    <string>yuuta</string>
    </property>
   </widget>
   <widget class="QRadioButton" name="radioButton2">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>9</x>
@@ -40,6 +46,9 @@
    </property>
   </widget>
   <widget class="QRadioButton" name="radioButton3">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>9</x>
